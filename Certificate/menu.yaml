@@ -1,0 +1,10 @@
+
+set project to sandy : oc project sandy
+clear : oc delete -f issuer.yaml ; oc delete -f cert.yaml ; oc delete secret q-certificate-secret ; oc delete -f deploy.yaml
+create issuer : oc create -f issuer.yaml ; sleep 5 ; oc get issuer q-issuer -o json
+create certificate : oc create -f cert.yaml ; sleep 5 ; oc get certificate q-certificate -o json
+show :
+    certificate request : oc get certificaterequest | grep q-certificate
+    show secret q-certificate-secret : oc get secret q-certificate-secret -o json
+create deployment that uses secret : oc create -f deploy.yaml
+watch : while :; do clear ; date ; oc get certificaterequest | grep q-cert ; echo ; oc get pod |grep qdeploy; sleep 10 ; done
