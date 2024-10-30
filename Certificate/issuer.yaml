@@ -1,8 +1,0 @@
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: q-issuer
-  namespace: sandy
-spec:
-  ca:
-    secretName: cs-ca-certificate-secret

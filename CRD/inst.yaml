@@ -1,9 +1,0 @@
-
-apiVersion : todos.com/v1
-kind : ToDoList
-metadata :
-  name : uregent-todos
-spec :
-  listName : Urgent
-  maxToDos : 50
-  replicas : 2
