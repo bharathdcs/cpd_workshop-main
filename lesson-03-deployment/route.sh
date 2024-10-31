@@ -2,20 +2,20 @@
 . ../common.sh
 
 
-msg "--- creating route qchroute using the service qch-service ---"
+msg "--- creating route dbkroute using the service dbk-service ---"
 
 cat <<EOF | oc apply -f -
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: qchroute
+  name: dbkroute
   namespace: $PROJECT
 spec:
   to:
     kind: Service
-    name: qch-service
+    name: dbk-service
   port:
-    targetPort: qch-https-port
+    targetPort: dbk-https-port
   tls:
     termination: passthrough
     insecureEdgeTerminationPolicy: Redirect
@@ -23,7 +23,7 @@ EOF
 
 sleep 3
 
-route=$(oc get route --no-headers  | grep qch | awk '{print $2}')
+route=$(oc get route --no-headers  | grep dbk | awk '{print $2}')
 msg "--- curl -k https://$route ---"
 curl -k https://$route
 

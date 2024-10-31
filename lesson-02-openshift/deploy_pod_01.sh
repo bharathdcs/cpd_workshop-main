@@ -4,7 +4,7 @@
 # delete the pod if it exist
 oc delete pod testpod
 
-msg "--- Deploying image qchpython to openshift ---"
+msg "--- Deploying image dbkpython to openshift ---"
 
 #
 #	The image is push to namespace openshift-marketplace.  The pod must be also in the same name space.
@@ -22,7 +22,7 @@ metadata:
 spec:
   containers:
     - name: cont1
-      image : qchpython
+      image : dbkpython
 EOF
 
 set -x

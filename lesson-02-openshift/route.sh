@@ -1,22 +1,22 @@
 
 . ../common.sh
 
-oc delete route qchroute
+oc delete route dbkroute
 
-msg "--- creating route qchroute using service qch-service ---"
+msg "--- creating route dbkroute using service dbk-service ---"
 
 cat <<EOF | oc apply -f -
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: qchroute
+  name: dbkroute
   namespace: $PROJECT
 spec:
   to:
     kind: Service
-    name: qch-service
+    name: dbk-service
   port:
-    targetPort: qch-https-port
+    targetPort: dbk-https-port
   tls:
     termination: passthrough
     insecureEdgeTerminationPolicy: Redirect

@@ -4,9 +4,9 @@
 . ./cleanup.sh
 clear
 
-msg "---  Building Python / Flask image and tagging it as qchpython --------"
+msg "---  Building Python / Flask image and tagging it as dbkpython --------"
 set -x
-podman build -t qchpython .
+podman build -t dbkpython .
 set +x
 
 msg "--- Checking podman images after the build ---"
@@ -25,15 +25,15 @@ $HOST
 not-used" | openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 3650 -out domain.crt
 
 
-msg "--- Starting image qchpython and run the app ---"
+msg "--- Starting image dbkpython and run the app ---"
 set -x
-podman run --rm --name anyname qchpython python3 app.py 
+podman run --rm --name anyname dbkpython python3 app.py 
 set +x
 
 
-msg "--- Starting image qchpython and run the app sharing the certs with the /src folder ---"
+msg "--- Starting image dbkpython and run the app sharing the certs with the /src folder ---"
 set -x
-podman run --rm -d --name anyname -v .:/src:Z qchpython python3 app.py
+podman run --rm -d --name anyname -v .:/src:Z dbkpython python3 app.py
 set +x
 
 sleep 3

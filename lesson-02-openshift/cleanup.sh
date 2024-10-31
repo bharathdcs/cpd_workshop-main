@@ -5,7 +5,7 @@
 podman stop anyname
 podman rm anyname
 podman rm `podman ps --noheading -a | awk '{print $1}'`
-podman rmi qchpython
+podman rmi dbkpython
 oc delete pod testpod
-oc delete secret qchcert
-oc delete service qch-service
+oc delete secret dbkcert
+oc delete service dbk-service

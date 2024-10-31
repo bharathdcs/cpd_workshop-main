@@ -12,7 +12,7 @@ This session uses the same Python/Flask application from lession 01.  The web ap
 - run this image in detach mode
 - curl test on  '/' , '/api' , '/simerror'
 
-## Dockerfile - used to build the image qchpython
+## Dockerfile - used to build the image dbkpython
 
 - the Dockerfile file 'inherit' a python image , and add the flask library
 - create a /src folder, and set it as working folder
@@ -22,13 +22,13 @@ After building
 
 ```
 REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
-localhost/qchpython       latest      cfa3590a8f71  4 seconds ago  62.1 MB  * created image *
+localhost/dbkpython       latest      cfa3590a8f71  4 seconds ago  62.1 MB  * created image *
 docker.io/library/python  3.8-alpine  b7514e346821  16 hours ago   49.9 MB  * base image * 
 ```
 
 ## Run image : 
 
-> podman run --rm --name anyname qchpython python3 app.py 
+> podman run --rm --name anyname dbkpython python3 app.py 
 
 Fail with following image
 
@@ -46,7 +46,7 @@ FileNotFoundError: [Errno 2] No such file or directory
 
 ## Run image with certificate : 
 
-> podman run --name anyname -v .:/src qchpython python3 app.py
+> podman run --name anyname -v .:/src dbkpython python3 app.py
 
 ```
  * Running on all addresses.
@@ -81,7 +81,7 @@ version: '3.3'
 services:
 
   cpd_flask :
-    image: qchpython
+    image: dbkpython
     container_name : anyname
     ports :
       - 7777:7777

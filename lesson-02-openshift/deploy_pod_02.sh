@@ -6,7 +6,7 @@ oc delete pod testpod
 
 export internal=$(oc registry info --internal=true)
 
-msg "--- Deploying image qchpython to openshift internal registry at $internal/$PROJECT/qchpython ---"
+msg "--- Deploying image dbkpython to openshift internal registry at $internal/$PROJECT/dbkpython ---"
 
 cat <<EOF | oc apply -f -
 
@@ -20,7 +20,7 @@ metadata:
 spec:
   containers:
     - name: cont1
-      image : $internal/$PROJECT/qchpython
+      image : $internal/$PROJECT/dbkpython
 EOF
 
 set -x

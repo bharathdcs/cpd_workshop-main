@@ -3,7 +3,7 @@
 
 . ../common.sh
 
-route=$(oc get route | grep qch-service | awk '{print $2}')
+route=$(oc get route | grep dbk-service | awk '{print $2}')
 
 
 msg "--- curl -k https://$route/simerror ---"

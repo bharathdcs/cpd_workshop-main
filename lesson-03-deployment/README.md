@@ -1,7 +1,7 @@
 
 # Session 4 - Deployment - Objectives
 
-This requires lesson 3 to be completed : service / routes / TLS cert created , and qchpython image pushed to OC registry.
+This requires lesson 3 to be completed : service / routes / TLS cert created , and dbkpython image pushed to OC registry.
 
 Session 3 deploy a single testpod to OC.  In this session we create a deployment that will ensure that 4 pods are running all the time.  Curl request will be balanced among the pods.
 
@@ -17,7 +17,7 @@ After this session, you will
 
 This creates the deploment qdeploy.  It specifies the following :
 
-- use image qchpython
+- use image dbkpython
 - run 4 copies 
 
 The deployment will create a replica set to manage the pods.
@@ -51,9 +51,9 @@ Using the caller pod
 hello world
 ```
 
-## service.sh Create a service qch-service for this deployment ( replica set )
+## service.sh Create a service dbk-service for this deployment ( replica set )
 
-> oc rsh caller curl -k https://qch-service
+> oc rsh caller curl -k https://dbk-service
 
 ```
 hello world
@@ -67,7 +67,7 @@ We get a response, it could be from any of the 3 pods.  To determine use oc logs
 
 ```
 NAME        HOST/PORT                                      PATH   SERVICES        PORT                   TERMINATION            WILDCARD
-myroute     qchroute-sandy.apps.raisers.cp.fyre.ibm.com           qch-service     qch-https-port         passthrough/Redirect   None
+myroute     dbkroute-sandy.apps.raisers.cp.fyre.ibm.com           dbk-service     dbk-https-port         passthrough/Redirect   None
 ```
 
 > curl -k https://myroute-sandy.apps.raisers.cp.fyre.ibm.com

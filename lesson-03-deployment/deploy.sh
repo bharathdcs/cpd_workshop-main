@@ -25,14 +25,14 @@ spec:
     spec:
       containers:
       - name: cont1
-        image : $internal/$PROJECT/qchpython
+        image : $internal/$PROJECT/dbkpython
         volumeMounts:
           - name: tls
             mountPath: /mnt
       volumes:
         - name: tls
           secret:
-            secretName: qchcert
+            secretName: dbkcert
 EOF
 
 while :

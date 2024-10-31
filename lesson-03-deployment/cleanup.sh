@@ -1,5 +1,5 @@
 
-oc delete service qch-service
-oc delete route qchroute
+oc delete service dbk-service
+oc delete route dbkroute
 oc delete deployment qdeploy
 oc delete pod testpod

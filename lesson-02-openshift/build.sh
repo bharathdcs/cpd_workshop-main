@@ -5,8 +5,8 @@ cleanup.sh
 
 clear
 
-msg "---  Building Python / Flask image and tagging it as qchpython --------"
-podman build -t qchpython .
+msg "---  Building Python / Flask image and tagging it as dbkpython --------"
+podman build -t dbkpython .
 
 msg "--- Checking podman images after the build ---"
 podman images

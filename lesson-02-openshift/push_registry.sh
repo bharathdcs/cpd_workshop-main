@@ -26,6 +26,6 @@ echo
 msg "Login to $HOST using $USERNAME/$PASSWORD - successful. OC registry operational."
 
 
-msg "-----  Pushing image qchpyton to openshift registry $HOST/$PROJECT/qchpython using podman push  ----------------------"
-podman push --creds "$USERNAME:$PASSWORD" qchpython $HOST/$PROJECT/qchpython --tls-verify=false
+msg "-----  Pushing image dbkpyton to openshift registry $HOST/$PROJECT/dbkpython using podman push  ----------------------"
+podman push --creds "$USERNAME:$PASSWORD" dbkpython $HOST/$PROJECT/dbkpython --tls-verify=false
 [ $? -ne 0 ] && echo "Push to internal registry failed" && exit 1
