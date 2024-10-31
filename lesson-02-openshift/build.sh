@@ -15,7 +15,7 @@ msg "--- Generate certificate and private key for https ---"
 HOST=$(hostname)
 echo "AU
 New South Wales
-St Leonard
+Sydney
 IBM
 CP4D
 $HOST
