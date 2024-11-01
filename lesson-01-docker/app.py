@@ -23,4 +23,4 @@ def simerror():
     f.close()
     return txt
 
-app.run ( "0.0.0.0" , 7777 , ssl_context=('./domain.crt', './domain.key') )
+app.run ( "0.0.0.0" , 7777)
