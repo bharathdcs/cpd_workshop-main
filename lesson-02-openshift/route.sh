@@ -1,24 +1,24 @@
 
 . ../common.sh
 
-oc delete route dbkroute
+oc delete route ibmroute
 
-msg "--- creating route dbkroute using service dbk-service ---"
+msg "--- creating route ibmroute using service ibm-service ---"
 
 cat <<EOF | oc apply -f -
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: dbkroute
+  name: ibmroute
   namespace: $PROJECT
 spec:
   to:
     kind: Service
-    name: dbk-service
+    name: ibm-service
   port:
-    targetPort: dbk-https-port
+    targetPort: ibm-http-port
   tls:
-    termination: passthrough
+    termination: edge
     insecureEdgeTerminationPolicy: Redirect
 EOF
 

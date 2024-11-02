@@ -5,9 +5,9 @@
 clear
 
 
-msg "---  Building Python / Flask image and tagging it as dbkpython --------"
+msg "---  Building Python / Flask image and tagging it as ibmpython --------"
 set -x
-podman build -t dbkpython .
+podman build -t ibmpython .
 set +x
 
 msg "--- Checking podman images after the build ---"
@@ -16,9 +16,9 @@ podman images
 set +x
 
 
-msg "--- Starting image dbkpython and run the app ---"
+msg "--- Starting image ibmpython and run the app ---"
 set -x
-podman run -p 7777:7777 -d --name noname --rm dbkpython
+podman run -p 7777:7777 -d --name noname --rm ibmpython
 set +x
 
 

@@ -4,7 +4,7 @@
 # delete the pod if it exist
 oc delete pod testpod
 
-msg "--- Deploying image dbkpython to openshift ---"
+msg "--- Deploying image ibmpython to openshift ---"
 
 #
 #	The image is push to namespace openshift-marketplace.  The pod must be also in the same name space.
@@ -22,15 +22,12 @@ metadata:
 spec:
   containers:
     - name: cont1
-      image : dbkpython
+      image : ibmpython
 EOF
 
-set -x
-while :
-do
-	oc get pod testpod 
-	sleep 10
-done
+sleep 10
+
+oc get pod testpod 
 
 oc logs testpod
 

@@ -28,4 +28,4 @@ def simerror():
     return txt
 
 # Note that the certificate names has changed.
-app.run ( "0.0.0.0" , 7777 , ssl_context=('/mnt/tls.crt', '/mnt/tls.key') )
+app.run ( "0.0.0.0" , 7777 )

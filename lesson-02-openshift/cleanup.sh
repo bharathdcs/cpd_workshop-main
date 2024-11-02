@@ -1,11 +1,7 @@
-
-[ -f domain.crt ] && rm domain.crt
-[ -f domain.key ] && rm domain.key
-
-podman stop anyname
-podman rm anyname
+podman stop noname
+podman rm noname
 podman rm `podman ps --noheading -a | awk '{print $1}'`
-podman rmi dbkpython
+podman rmi ibmpython
 oc delete pod testpod
-oc delete secret dbkcert
-oc delete service dbk-service
+oc delete secret ibmcert
+oc delete service ibm-service

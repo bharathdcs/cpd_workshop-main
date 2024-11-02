@@ -1,31 +1,31 @@
 
 . ../common.sh
 
-oc delete service dbk-service 
+oc delete service ibm-service 
 
-msg "-----  create a service dbk-service to expose it as port 443 instead of raw port 7777  -------------------"
+msg "-----  create a service ibm-service to expose the port 7777  -------------------"
 
 cat <<EOF | oc apply -f -
 apiVersion: v1
 kind: Service
 metadata:
-  name: dbk-service
+  name: ibm-service
   namespace : $PROJECT
 spec:
   selector:
     app: testpod
   ports:
     - protocol: TCP
-      name : dbk-https-port
-      port: 443
+      name : ibm-http-port
+      port: 7777
       targetPort: 7777
 EOF
 
-svc="dbk-service"
-msg "--- oc rsh caller curl -k https://$svc ---"
+svc="ibm-service:7777"
+msg "--- oc rsh caller curl -k http://$svc ---"
 
-oc rsh caller curl -k https://$svc
+oc rsh caller curl -k http://$svc
 
-msg "--- oc rsh caller curl -X POST -k -H 'Content-Type: application/json' -d '{ "name" : "john" }' -k https://$svc/api ---"
-oc rsh caller curl -X POST -k -H 'Content-Type: application/json' -d '{ "name" : "john" }' -k https://$svc/api
+msg "--- oc rsh caller curl -X POST -k -H 'Content-Type: application/json' -d '{ "name" : "john" }' -k http://$svc/api ---"
+oc rsh caller curl -X POST -k -H 'Content-Type: application/json' -d '{ "name" : "john" }' -k http://$svc/api
 

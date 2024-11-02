@@ -2,25 +2,25 @@
 
 . ../common.sh
 
-msg "-----  create a service dbk-service to expose it as port 443 instead of raw port 7777  -------------------"
+msg "-----  create a service ibm-service to expose it as port 443 instead of raw port 7777  -------------------"
 
 cat <<EOF | oc apply -f -
 apiVersion: v1
 kind: Service
 metadata:
-  name: dbk-service
+  name: ibm-service
   namespace : $PROJECT
 spec:
   selector:
     app: testpod
   ports:
     - protocol: TCP
-      name : dbk-https-port
+      name : ibm-https-port
       port: 443
       targetPort: 7777
 EOF
 
-svc="dbk-service"
+svc="ibm-service"
 
 msg "--- oc rsh curl -k https://$svc ---"
 oc rsh caller curl -k https://$svc

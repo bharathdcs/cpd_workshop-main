@@ -25,14 +25,14 @@ spec:
     spec:
       containers:
       - name: cont1
-        image : $internal/$PROJECT/dbkpython
+        image : $internal/$PROJECT/ibmpython
         volumeMounts:
           - name: tls
             mountPath: /mnt
       volumes:
         - name: tls
           secret:
-            secretName: dbkcert
+            secretName: ibmcert
 EOF
 
 while :

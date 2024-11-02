@@ -7,27 +7,27 @@
 
 Deploy application docker image to Openshift.  This session demonstrates the following :
 
-- use the image dbkpython created in lesson 2 and deploy to openshift
+- use the image ibmpython created in lesson 2 and deploy to openshift
 - create a testpod using this image
 - curl test on '/' , '/api' , '/simerror'
 
 
 ## build.sh :  build image and create testpod
 
-- Dockerfile  - build image dbkpython and generate certificates/pte key
+- Dockerfile  - build image ibmpython and generate certificates/pte key
 
 
 ## deploy_pod_01.sh : delete and recreate the testpod.
 
 
-Creates a testpod using this image dbkpython. The create testpod will fail with ImagePullErr.
+Creates a testpod using this image ibmpython. The create testpod will fail with ImagePullErr.
 
-This is expected because it does not know how to get the dbkpython.  The image is in podman registry.  But it is *not* in openshift registry.
+This is expected because it does not know how to get the ibmpython.  The image is in podman registry.  But it is *not* in openshift registry.
 
 To be able to create testpod , need to take the image from podman , and push it to openshift registry ( e.g of a registry ,  https://hub.docker.com/ )
 
 
-## push_registry.sh : push dbkpython to OC registry
+## push_registry.sh : push ibmpython to OC registry
 
 OC comes with an internal registry which is not expose by default.  This script expose the registry if it is not already expose,  and attempt to login for sanity check.
 
@@ -51,7 +51,7 @@ Storing signatures
 
 ## deploy_pod_02.sh : delete and recreate the testpod.
 
-Notice the image path , it is associated with a project :  image-registry.openshift-image-registry.svc:5000/sandy/dbkpython
+Notice the image path , it is associated with a project :  image-registry.openshift-image-registry.svc:5000/sandy/ibmpython
 
 > oc get pod testpod
 
@@ -78,7 +78,7 @@ FileNotFoundError: [Errno 2] No such file or directory
 
 It is complaining that it cannot find the certificates in '/mnt/tls.crt', '/mnt/tls.key'.  Will need to create a secret using the certs in step1 , and then mounted it to /mnt on the pod.
 
-## makesecret.sh : make secret dbkcert using the file domain.crt  domain.key
+## makesecret.sh : make secret ibmcert using the file domain.crt  domain.key
 
 It is possible to embed / copy the certificat files into the image using specifying it in the Dockerfile.  This would require image rebuild when cert renew.  Hence need to externalised the cert from the image.  This is done by creating a 'secret' using the certificates, and advise the pod to use this secret.
 
@@ -115,15 +115,15 @@ Even though the hostname for the testpod is the podname , https://testpod:7777 d
 
 ## Test using curl with service name - service.sh
 
-Most services are accessed via service names instead of IP address.  To make that association , run the service.sh to create dbk-service against this testpod.
+Most services are accessed via service names instead of IP address.  To make that association , run the service.sh to create ibm-service against this testpod.
 
-> oc rsh caller curl -k https://dbk-service
+> oc rsh caller curl -k https://ibm-service
 
 ```
 hello world
 ```
 
-> oc rsh caller curl -X POST -k -H 'Content-Type: application/json' -d '{ "name" : "john" }'  -k https://dbk-service/api
+> oc rsh caller curl -X POST -k -H 'Content-Type: application/json' -d '{ "name" : "john" }'  -k https://ibm-service/api
 
 ```
 {"name":"john","now":"Thu, 24 Mar 2022 12:23:54 GMT"}
@@ -133,14 +133,14 @@ Notice that the port number 7777 is no longer used.  The service has map 7777 to
 
 ## Test using curl with route - route.sh
 
-This step expose the testpod to be accessible outside of the cluster.  In this case, it creates a route myroute associated with the service dbk-service.
+This step expose the testpod to be accessible outside of the cluster.  In this case, it creates a route myroute associated with the service ibm-service.
 
 
 >  oc get route
 
 ```
 NAME        HOST/PORT                                      PATH   SERVICES        PORT                   TERMINATION            WILDCARD
-myroute     myroute-sandy.apps.bearing.cp.fyre.ibm.com            dbk-service     dbk-https-port         passthrough/Redirect   None
+myroute     myroute-sandy.apps.bearing.cp.fyre.ibm.com            ibm-service     ibm-https-port         passthrough/Redirect   None
 ```
 
 > curl -k https://myroute-sandy.apps.bearing.cp.fyre.ibm.com

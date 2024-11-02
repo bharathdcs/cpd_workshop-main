@@ -2,20 +2,20 @@
 . ../common.sh
 
 
-msg "--- creating route dbkroute using the service dbk-service ---"
+msg "--- creating route ibmroute using the service ibm-service ---"
 
 cat <<EOF | oc apply -f -
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: dbkroute
+  name: ibmroute
   namespace: $PROJECT
 spec:
   to:
     kind: Service
-    name: dbk-service
+    name: ibm-service
   port:
-    targetPort: dbk-https-port
+    targetPort: ibm-https-port
   tls:
     termination: passthrough
     insecureEdgeTerminationPolicy: Redirect
@@ -23,7 +23,7 @@ EOF
 
 sleep 3
 
-route=$(oc get route --no-headers  | grep dbk | awk '{print $2}')
+route=$(oc get route --no-headers  | grep ibm | awk '{print $2}')
 msg "--- curl -k https://$route ---"
 curl -k https://$route
 
