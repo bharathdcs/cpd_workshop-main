@@ -4,9 +4,9 @@
 # delete the pod if it exist
 oc delete pod testpod
 
-export internal=$(oc registry info --internal=true)
+#export internal=$(oc registry info --internal=true)
 
-msg "--- Deploying image ibmpython to openshift internal registry at $internal/$PROJECT/ibmpython ---"
+#msg "--- Deploying image ibmpython to openshift internal registry at $internal/$PROJECT/ibmpython ---"
 
 cat <<EOF | oc apply -f -
 
@@ -20,7 +20,7 @@ metadata:
 spec:
   containers:
     - name: cont1
-      image : $internal/$PROJECT/ibmpython
+      image : quay.io/bkdevara/ibmpython
 EOF
 
 sleep 10
