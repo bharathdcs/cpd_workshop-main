@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
     - name: cont1
-      image : $internal/$PROJECT/ibmpython
+      image : quay.io/bkdevara/ibmpython
 EOF
 
 while :
