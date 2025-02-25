@@ -8,10 +8,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 HOST=$(oc get route default-route -n openshift-image-registry --template='{{.spec.host}}')
-if [ $HOST -eq "" ] ; then
-	msg "Internal registry is unavailable"
-	exit 1
-fi
+
 export USERNAME=kubeadmin
 export PASSWORD=$(oc whoami -t)
 
